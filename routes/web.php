@@ -4,6 +4,10 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
+// Site
 Route::get('/', [SiteController::class, 'index']);
 
+
+// Auth
 Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'authenticate']);
