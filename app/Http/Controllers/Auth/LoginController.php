@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -20,10 +21,18 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->intended('/');
-        } else {
-            return back()->withErrors(['email' => 'Email ou senha inválidos']);
+            return redirect()->intended(route('site.dashboard'));
         }
+
+        return back()->withErrors(['email' => 'Email ou senha inválidos']);
+    }
+
+    public function logout(Request $request): RedirectResponse {
+        Auth::logout(); 
+        
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('site.index');
     }
 }

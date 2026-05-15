@@ -3,7 +3,7 @@
         <h1 class="font-bold">Faça seu login</h1>
 
         <section class="mt-4">
-            <form action="/login" method="post">
+            <form action="{{ route('auth.login') }}" method="post">
                 @csrf
                 @error('email')
                     <div class="bg-red-500 text-white p-2 mt-2 rounded-md">
