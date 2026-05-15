@@ -28,6 +28,11 @@
 
                 <button type="submit" class="bg-white border-2 p-2">Entrar</button>
             </form>
+
+            <p class="mt-5 text-center">
+                Não tem uma conta? <a href="{{ route('site.register') }}"
+                    class="text-blue-500 underline hover:text-blue-700 transition-colors duration-300">Registre-se</a>
+            </p>
         </section>
     </main>
 </x-layout>
