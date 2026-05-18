@@ -24,11 +24,6 @@ class HabitController extends Controller
             ->with('success', 'Hábito criado com sucesso!');
     }
 
-    public function show(Habit $habit)
-    {
-        //
-    }
-
     public function edit(Habit $habit)
     {
         //
@@ -41,6 +36,16 @@ class HabitController extends Controller
 
     public function destroy(Habit $habit)
     {
-        //
+        if ($habit->user_id !== auth()->user()->id) {
+            return redirect()
+                ->route('site.dashboard')
+                ->with('error', 'Você não tem permissão para apagar este hábito!');
+        }
+
+        $habit->delete();
+
+        return redirect()
+            ->route('site.dashboard')
+            ->with('success', 'Hábito apagado com sucesso!');
     }
 }

@@ -42,13 +42,26 @@
 
             <div class="grid gap-4">
                 @forelse ($habits as $habit)
-                    <div class="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-lg font-medium text-zinc-900">
-                                {{ $habit->name }}
-                            </h3>
+                    <div
+                        class="group rounded-xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-zinc-900">
+                                    {{ $habit->name }}
+                                </h3>
+                            </div>
 
-                            <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                            <div class="flex items-center gap-3">
+                                <form action="{{ route('habit.destroy', $habit->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit"
+                                        class="flex h-10 w-10 items-center justify-center rounded-lg text-zinc-400 transition hover:bg-red-50 hover:text-red-600">
+                                        <x-icons.trash />
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @empty
