@@ -1,16 +1,32 @@
 <x-layout>
     <main class="max-w-4xl mx-auto py-10 px-6">
         <section class="mb-10">
-            <h1 class="text-4xl font-bold text-zinc-800">
-                Dashboard
-            </h1>
+            <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h1 class="text-4xl font-bold tracking-tight text-zinc-900">
+                        Dashboard
+                    </h1>
 
-            <p class="mt-2 text-zinc-600">
-                Bem-vindo(a),
-                <span class="font-semibold text-zinc-900">
-                    {{ auth()->user()->name }}
-                </span>
-            </p>
+                    <p class="mt-3 text-zinc-600">
+                        Bem-vindo(a),
+                        <span class="font-semibold text-zinc-900">
+                            {{ auth()->user()->name }}
+                        </span>
+                    </p>
+                </div>
+
+                <a href="{{ route('habit.create') }}"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-900 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-zinc-800 hover:shadow-md">
+                    <span class="text-lg leading-none">+</span>
+                    Novo Hábito
+                </a>
+            </div>
+
+            @if (session('success'))
+                <div class="bg-emerald-100 border border-emerald-200 rounded-xl p-4 text-emerald-700">
+                    {{ session('success') }}
+                </div>
+            @endif
         </section>
 
         <section>
@@ -41,7 +57,7 @@
                             Você ainda não cadastrou nenhum hábito.
                         </p>
 
-                        <a href="/habits/cadastrar"
+                        <a href="{{ route('habit.create') }}"
                             class="mt-4 inline-block px-4 py-2 bg-zinc-900 text-white rounded-lg">
                             Cadastrar hábito
                         </a>
